@@ -1,4 +1,17 @@
 import { ElLoading } from 'element-plus'
+import { writeText } from '@tauri-apps/api/clipboard';
+import { ElMessage } from 'element-plus'
+export const copy = async (text, msg = '已复制') => {
+  try {
+    await writeText(text)
+    if(msg) ElMessage.success(msg)
+    return true
+  } catch (error) {
+    console.log(error)
+    return Promise.reject()
+  }
+}
+
 export const isTauri = () => {
   return Boolean(
     typeof window !== 'undefined' &&
