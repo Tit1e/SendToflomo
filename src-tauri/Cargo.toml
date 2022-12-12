@@ -1,12 +1,12 @@
 [package]
 name = "send-to-flomo"
 version = "0.0.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "Kindle、Apple Books、KOReader书摘与笔记导入至 flomo"
+authors = ["Tit1e"]
 license = ""
 repository = ""
-edition = "2021"
-rust-version = "1.57"
+edition = "2022"
+rust-version = "1.65.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
