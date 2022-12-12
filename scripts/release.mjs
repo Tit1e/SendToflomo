@@ -39,7 +39,7 @@ async function release() {
   fs.writeFileSync('./src-tauri/tauri.conf.json', JSON.stringify(tauriJson, null, 2));
 
   // 提交修改的文件，打 tag 标签（tag 标签是为了触发 github action 工作流）并推送到远程
-  execSync('git add ./package.json ./UPDATE_LOG.md ./scr-tauri/tauri.conf.json');
+  execSync('git add ./package.json ./UPDATE_LOG.md ./src-tauri/tauri.conf.json');
   execSync(`git commit -m "v${nextVersion}"`);
   execSync(`git tag -a v${nextVersion} -m "v${nextVersion}"`);
   execSync(`git push`);
