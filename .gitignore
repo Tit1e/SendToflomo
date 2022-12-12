@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-
+scr-tauri/target
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
