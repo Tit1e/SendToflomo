@@ -34,7 +34,7 @@ async function release() {
   await updatelog(nextTag, 'release');
 
   // 将新版本写入 package.json 文件
-  // fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 2));
+  fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 2));
   // 将新版本写入 tauri.conf.json 文件
   fs.writeFileSync('./src-tauri/tauri.conf.json', JSON.stringify(tauriJson, null, 2));
 
