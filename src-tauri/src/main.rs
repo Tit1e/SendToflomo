@@ -2,7 +2,7 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-
+use dirs;
 use rusqlite::{Connection, Result};
 use serde::Serialize;
 use serde_json::to_string;
@@ -26,8 +26,10 @@ pub struct Book {
 }
 
 fn get_data() -> Result<Vec<Book>> {
-    // Open database
-    let conn = Connection::open("/Users/tit1e/Library/Containers/com.apple.iBooksX/Data/Documents/AEAnnotation/AEAnnotation_v10312011_1727_local.sqlite")?;
+    let home_dir = dirs::home_dir().unwrap();
+    let _home_dir = home_dir.display();
+    let sqlite_path = format!("{}/Library/Containers/com.apple.iBooksX/Data/Documents/AEAnnotation/AEAnnotation_v10312011_1727_local.sqlite", _home_dir);
+    let conn = Connection::open(sqlite_path)?;
 
     // Execute SQL query
     let mut stmt = conn.prepare("SELECT
@@ -63,7 +65,9 @@ fn get_data() -> Result<Vec<Book>> {
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
 fn get_apple_books() -> String {
-    let plist_file = "/Users/tit1e/Library/Containers/com.apple.BKAgentService/Data/Documents/iBooks/Books/Books.plist";
+    let home_dir = dirs::home_dir().unwrap();
+    let _home_dir = home_dir.display();
+    let plist_file = format!("{}/Library/Containers/com.apple.BKAgentService/Data/Documents/iBooks/Books/Books.plist", _home_dir);
     let file = File::open(plist_file).unwrap();
     let reader = BufReader::new(file);
     let plist: plist::Value = plist::from_reader(reader).unwrap();
