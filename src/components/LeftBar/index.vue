@@ -231,7 +231,7 @@ const $emit = defineEmits([
 const store = useStore()
 const selectedList = computed(() => store.getters.selectedList)
 const importDisabled = computed(() => store.getters.importCount >= 100)
-const bookList = computed(() => store.getters.bookList)
+const bookList = computed(() => store.getters.bookList.filter(i => i.texts.length))
 // 图书列表更新自动选中第一项
 watch(() => bookList.value[0], (val, old = {}) => {
   if(val && (val.title !== old.title)) {
@@ -481,7 +481,7 @@ function computedTag () {
       &-body {
         height: 0;
         flex: 1;
-        overflow: auto;
+        overflow: hidden;
       }
     }
     :deep(.el-divider) {
