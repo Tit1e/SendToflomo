@@ -20,6 +20,7 @@
         <div class="export k-icon"></div>
         <template #dropdown>
           <el-dropdown-menu>
+            <el-dropdown-item command="copy-markdown">复制 Markdown 文本</el-dropdown-item>
             <el-dropdown-item command="markdown">导出 Markdown</el-dropdown-item>
             <el-dropdown-item command="csv">导出 CSV</el-dropdown-item>
           </el-dropdown-menu>
@@ -78,12 +79,11 @@
           <div class="translate k-icon" @click="toggleLanguage"></div>
         </el-tooltip>
       <el-dropdown @command="handleCommand">
-        <div class="setting k-icon"></div>
+        <div class="link k-icon"></div>
         <template #dropdown>
           <el-dropdown-menu>
             <template v-if="isTauri">
-              <el-dropdown-item command="update">{{t('check-update')}}</el-dropdown-item>
-              <el-dropdown-item command="blog" divided>
+              <el-dropdown-item command="blog">
                 {{t('blog')}}
               </el-dropdown-item>
               <el-dropdown-item command="photo">
@@ -120,6 +120,7 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+      <div class="setting k-icon ml-16"></div>
     </div>
   </div>
 </template>
@@ -174,11 +175,7 @@ const urlMap = {
 
 function handleCommand(type){
   if(isTauri){
-    if(type === 'update') {
-      ipcRenderer.send('update')
-    } else {
-      openUrl(urlMap[type])
-    }
+    openUrl(urlMap[type])
   }
 }
 
@@ -240,6 +237,10 @@ function handleCommand(type){
     &.export {
       margin-right: 16px;
       background-image: url(../../assets/icons/export.png);
+    }
+    &.link {
+      margin-right: 16px;
+      background-image: url(../../assets/icons/link.png);
     }
     &.setting {
       background-image: url(../../assets/icons/setting.png);

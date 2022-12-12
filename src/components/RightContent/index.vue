@@ -49,7 +49,8 @@ import { save as tsave } from '@tauri-apps/api/dialog';
 import { writeTextFile, BaseDirectory } from '@tauri-apps/api/fs';
 import { downloadDir } from '@tauri-apps/api/path';
 import { open } from '@tauri-apps/api/shell';
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessageBox } from 'element-plus'
+import { copy } from '@/utils/index.js'
 const { t } = useI18n()
 
 const store = useStore()
@@ -61,7 +62,10 @@ const $emit = defineEmits([
 
 function handleExport(command){
   if(!contentList.value.length) return false
-  switch(command){
+  switch (command) {
+    case 'copy-markdown':
+      exportMD(true)
+      break
     case 'markdown':
       exportMD()
       break
@@ -136,13 +140,17 @@ async function exportCSV() {
   })
 }
 
-async function exportMD(){
+async function exportMD(isCopy = false){
   const { options, tag } = parseOptions.value
   const { title } = options
   const content = contentList.value.reduce((pre, val) => {
     const content = (val.update_content || val.content)
     return pre + `- ${content.replace(val.note, '').replace(tag, '').replace(/\r/g, '').replace(/\n/g, '')}\n\n`
   }, `# ${title}\n\n`)
+  if (isCopy) {
+    copy(content)
+    return
+  }
   if (isTauri) {
     const downloadPath = await downloadDir()
     const path = await tsave({
