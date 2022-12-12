@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "SendToflomo",
-    "version": "0.0.0"
+    "version": "0.0.14"
   },
   "tauri": {
     "macOSPrivateApi": true,
@@ -52,7 +52,9 @@
     "updater": {
       "active": true,
       "dialog": true,
-      "endpoints": ["https://tit1e.github.io/SendToflomo/install.json"],
+      "endpoints": [
+        "https://tit1e.github.io/SendToflomo/install.json"
+      ],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQzQUQ2NjU2MkU5NDA5NkEKUldScUNaUXVWbWF0UTZ2TzdkMkUzclpwUHNpZG9pdDF1ZEdkdUZzQ3B4bmE2UEtHZXRKdC9HVlEK"
     },
     "windows": [
