@@ -2,8 +2,9 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 import ElementPlus from 'element-plus'
+import checkUpdate from "./utils/checkUpdate"
+checkUpdate()
 import './theme/index.scss'
-
 import VueI18n from './language'
 import store from '@/store/index.js'
 
