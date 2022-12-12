@@ -1,0 +1,549 @@
+<template>
+  <div class="left-bar" :class="{ 'pt-10': !isTauri, electron: isTauri }">
+    <div class="drag-bar" data-tauri-drag-region></div>
+    <div class="left-bar-form">
+      <el-form
+        :model="options"
+        ref="form"
+        size="mini"
+        label-suffix="："
+        label-position="top"
+      >
+        <div class="left-bar-form-content">
+          <div class="left-bar-form-content-top">
+            <el-form-item label-width="0" v-if="!isTauri">
+              <div class="pointer text-center border pd-10 radius">
+                <el-tooltip effect="dark" placement="right">
+                  <template #content>
+                    <div slot="content" style="line-height: 1.5em">
+                      <b>点击下载应用</b>
+                      <br>
+                      由于 Apple Books 笔记的读取方式限制，
+                      <br>
+                      必须安装客户端才能使用。
+                    </div>
+                  </template>
+                  <a
+                    class="link"
+                    href="https://github.com/Tit1e/kindle2Flomo/releases"
+                    target="_blank"
+                  >
+                    从 Apple Books 导入
+                  </a>
+                </el-tooltip>
+              </div>
+              <a
+                class="how link"
+                href="https://evolly.one/2021/05/30/158-mac-handle-bad-app/"
+                target="_blank"
+              >
+                Send2flomo.app 打不开？
+              </a>
+            </el-form-item>
+          </div>
+          <div class="left-bar-form-content-body">
+            <el-collapse v-model="activeName" accordion>
+              <el-collapse-item name="1">
+                <template #title>
+                  <div>
+                    <i class="el-icon-set-up mr-4"></i>{{ t('parse-options') }}
+                  </div>
+                </template>
+                <el-divider>{{ t('api-options') }}</el-divider>
+                <el-form-item label="" label-width="0px">
+                  <el-input
+                    v-model="options.api"
+                    type="password"
+                    show-password
+                    placeholder="API 采用本地存储"
+                  ></el-input>
+                </el-form-item>
+                <el-divider>{{ t('tag-options') }}</el-divider>
+                <el-form-item label="Tag">
+                  <div class="flex">
+                    <div class="flex-1">
+                      <el-input
+                        v-model="options.tag"
+                        :disabled="options.noTag"
+                        placeholder="Tag 名称"
+                        clearable
+                      ></el-input>
+                    </div>
+                    <div class="flex-1 pl-10">
+                      <el-checkbox v-model="options.noTag">{{
+                        t('hide-tag')
+                      }}</el-checkbox>
+                    </div>
+                  </div>
+                </el-form-item>
+                <template v-if="!options.noTag">
+                  <el-form-item :label="t('position-of-tag')">
+                    <el-radio-group v-model="options.tagPosition">
+                      <el-radio-button :label="true">{{
+                        t('top')
+                      }}</el-radio-button>
+                      <el-radio-button :label="false">{{
+                        t('bottom')
+                      }}</el-radio-button>
+                    </el-radio-group>
+                  </el-form-item>
+                  <el-form-item label="空行">
+                    <el-radio-group v-model="options.noEmptyLine">
+                      <el-radio-button :label="false">{{
+                        t('on')
+                      }}</el-radio-button>
+                      <el-radio-button :label="true">{{
+                        t('off')
+                      }}</el-radio-button>
+                    </el-radio-group>
+                  </el-form-item>
+                </template>
+                <el-divider>{{ t('notes-options') }}</el-divider>
+                <el-form-item label="位置">
+                  <el-radio-group v-model="options.notePosition">
+                    <el-radio-button :label="true">摘录上方</el-radio-button>
+                    <el-radio-button :label="false">摘录下方</el-radio-button>
+                  </el-radio-group>
+                </el-form-item>
+                <el-form-item label="分隔符">
+                  <el-input
+                    v-model="options.split"
+                    placeholder="为空以空行填充，此空行无法禁用"
+                    clearable
+                  ></el-input>
+                  <span class="fz-12"
+                    ><b class="highlight">仅在有笔记时生效</b
+                    >，且总在笔记与摘录之间</span
+                  >
+                </el-form-item>
+              </el-collapse-item>
+              <el-collapse-item name="2">
+                <template #title>
+                  <div>
+                    <i class="el-icon-notebook-2 mr-4"></i>{{ t('book-list') }}
+                  </div>
+                </template>
+
+                <template v-if="!!bookList.length">
+                  <el-form-item :label="t('book-name')">
+                    <el-input v-model="options.book" @blur="updateBook"></el-input>
+                  </el-form-item>
+                  <el-form-item :label="t('book-list')" label-width="0">
+                    <div class="list-wrap">
+                      <el-radio-group
+                        class="book-list"
+                        v-model="options.title"
+                        size="small"
+                        @change="selectChange"
+                      >
+                        <el-radio
+                          v-for="item in bookList"
+                          :key="item.uuid"
+                          :label="item.title"
+                          border
+                          >{{ item.title }}</el-radio
+                        >
+                      </el-radio-group>
+                    </div>
+                  </el-form-item>
+                </template>
+              </el-collapse-item>
+            </el-collapse>
+          </div>
+        </div>
+      </el-form>
+    </div>
+    <div class="left-bar-bottom">
+      <template v-if="disabledSend">
+        <el-tooltip
+          effect="dark"
+          :disabled="false"
+          :content="
+            importDisabled
+              ? '导入数量已达 100 条限额'
+              : '请确保 API 已填写，需要导入的 MEMO 已勾选'
+          "
+          placement="top"
+        >
+          <el-button type="primary" :disabled="disabledSend"  size="mini">{{
+            t('import')
+          }}</el-button>
+        </el-tooltip>
+      </template>
+      <template v-else>
+        <el-button type="primary"  size="mini" @click="submit">{{
+          t('import')
+        }}</el-button>
+      </template>
+    </div>
+    <!-- 微信登陆弹窗 -->
+    <el-dialog
+      custom-class="login-dialog"
+      v-model="showDialog"
+      :close-on-click-modal="false"
+      append-to-body
+      destroy-on-close
+      width="270px"
+    >
+      <div class="iframe-box" v-loading="loading">
+        <iframe
+          v-if="showDialog"
+          src="https://weread.qq.com/#login"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div class="text-center" v-show="!loading">
+        <el-button
+          type="text"
+          style="color: #999999;"
+          @click="showDialog = false"
+          >取消</el-button
+        >
+        <el-button type="text" @click="GetNotebooklist">我已登录</el-button>
+      </div>
+    </el-dialog>
+  </div>
+</template>
+
+<script setup>
+import { dexiePut } from '@/db/dexie.js'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
+import init from '@/utils/init.js'
+import { openUrl } from '@/utils/utils.js'
+import {Loading} from '@/utils/index.js'
+
+import {
+  getNotebooklist,
+  getBookMarkList,
+  getReviewList
+} from '@/utils/weread.js'
+import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
+
+const $emit = defineEmits([
+  'update-tag',
+  'parse',
+  'submit',
+  'list-update'
+])
+const store = useStore()
+const selectedList = computed(() => store.getters.selectedList)
+const importDisabled = computed(() => store.getters.importCount >= 100)
+const bookList = computed(() => store.getters.bookList)
+// 图书列表更新自动选中第一项
+watch(() => bookList.value[0], (val, old = {}) => {
+  if(val && (val.title !== old.title)) {
+    updateData(val)
+  }
+})
+// 更新图书名称
+function updateBook(e){
+  let bookData = bookList.value.find(item => item.title === options.title)
+  if(bookData){
+    bookData = {
+      ...bookData,
+      book: e.target.value
+    }
+    delete bookData.texts
+  }
+  store.commit('UPDATE_BOOK', bookData)
+  dexiePut(bookData, 'books')
+}
+
+const isTauri = store.getters.isTauri
+let options = reactive({
+  book: '',
+  title: '',
+  split: '',
+  tag: 'kindle',
+  api: '',
+  noTag: false,
+  // false 底部，true 顶部
+  tagPosition: false,
+  notePosition: false,
+  noEmptyLine: true,
+})
+
+let activeName = ref('1')
+
+watch(
+  () => activeName.value,
+  val => {
+    window.localStorage.setItem('activeName', val)
+  }
+)
+
+const disabledSend = computed(
+  () => !selectedList.value.length || !options.api || importDisabled.value
+)
+
+function setOptions () {
+  const _options = JSON.parse(localStorage.getItem('options') || '{}')
+  options = reactive({
+    ...options,
+    ..._options
+  })
+  activeName.value = window.localStorage.getItem('activeName') || '1'
+}
+
+setOptions()
+
+watch(
+  () => options,
+  () => {
+    computedTag()
+    parse()
+  },
+  { deep: true }
+)
+
+async function getWereadNotes(books, needSort = true, loadingInstance) {
+  const _books = books.reverse()
+  const {bookId, title} = _books[0]
+  const ReviewList = getReviewList({
+    title,
+    bookId,
+    listType: 11,
+    maxIdx: 0,
+    count: 0,
+    listMode: 2,
+    synckey: 0,
+    mine: 1
+  })
+  const BookMarkList = getBookMarkList(bookId, title)
+  try {
+    await Promise.all([ReviewList, BookMarkList])
+    if(!needSort){
+      await init(bookList.value.map(item => item.title).reverse(), true)
+    }else{
+      await init(_books.map(item => item.title), needSort)
+    }
+    loadingInstance.close()
+  } catch (error) {
+    console.log(error)
+    if(error.errcode === -2012){
+      importWeRead()
+    }
+    loadingInstance.close()
+  }
+}
+
+function selectChange (val) {
+  const data = bookList.value.find(i => i.title === val)
+  if (!data) return false
+
+  if (data.bookId) {
+    const loadingInstance = Loading({text: t('reading-notes')})
+    getWereadNotes([data], false, loadingInstance)
+  }
+  updateData(data)
+}
+
+function handleBooksData (_bookList) {
+  store.commit('SET_BOOK_LIST', _bookList)
+  const data = _bookList[0]
+  if(data){
+    // 微信读书获取第一本书的内容
+    if (data.bookId) selectChange(data.title)
+    updateData(data)
+  }
+}
+
+function updateData (data) {
+  const { title, texts, bookId, book } = data
+  options.title = title
+  options.book = book
+  computedTag()
+  $emit('list-update', { list: texts, options })
+  parse(true)
+}
+// weread
+const showDialog = ref(false)
+const loading = ref(false)
+function GetNotebooklist (loadingInstance) {
+  getNotebooklist()
+    .then(books => {
+      showDialog.value = false
+      loading.value = false
+      getWereadNotes(books, true, loadingInstance)
+    })
+    .catch(err => {
+      console.log(err)
+      loading.value = false
+      loadingInstance.close()
+    })
+}
+function importWeRead () {
+  showDialog.value = true
+  loading.value = true
+  const loadingInstance = Loading({text: t('reading-notes')})
+  GetNotebooklist(loadingInstance)
+}
+
+
+// Apple Books
+function importAppleBooks () {
+  const loadingInstance = Loading({text: t('reading-notes')})
+  // readSQLite()
+  //   .then(() => {
+  //     loadingInstance.close()
+  //   }).catch(e => {
+  //     ElMessage.error(e)
+  //     loadingInstance.close()
+  //   })
+}
+function parse (showBookList = false) {
+  if (showBookList) {
+    activeName.value = '2'
+  }
+  updateOptions()
+  $emit('parse', options)
+}
+function submit () {
+  $emit('submit', options.api)
+}
+function updateOptions () {
+  const { noTag, api, tag, split, tagPosition, noEmptyLine } = options
+  const optionsData = {
+    noTag,
+    api,
+    tag,
+    split,
+    tagPosition,
+    noEmptyLine,
+  }
+  localStorage.setItem('options', JSON.stringify(optionsData))
+}
+const Tag = ref('')
+function computedTag () {
+  let _tag = ''
+  const { tag, book, noTag } = options
+  if (noTag) {
+    $emit('update-tag', _tag)
+    Tag.value = _tag
+    return
+  }
+  if (!tag) {
+    _tag = `#${book}`
+  } else {
+    _tag = `#${tag}/${book}`
+  }
+  $emit('update-tag', _tag)
+  Tag.value = _tag
+}
+
+</script>
+
+<style lang="scss" scoped>
+.left-bar {
+  background-color: #e4f5ef;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  padding: 10px;
+  position: relative;
+  .drag-bar{
+    position: absolute;
+    top: 0;
+    height: 40px;
+    width: 100%;
+    left: 0;
+  }
+  &.electron {
+    margin-top: -40px;
+    padding-top: 40px;
+  }
+  &-form {
+    height: 0px;
+    flex: 1;
+    overflow: hidden;
+    padding-bottom: 10px;
+    :deep(.el-form) {
+      height: 100%;
+      .el-form-item {
+        &__label {
+          padding-bottom: 4px;
+        }
+        &--mini {
+          margin-bottom: 8px;
+        }
+      }
+    }
+    &-content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      &-body {
+        height: 0;
+        flex: 1;
+        overflow: auto;
+      }
+    }
+    :deep(.el-divider) {
+      .el-divider__text {
+        background-color: #e4f5ef;
+      }
+    }
+    :deep(.el-collapse) {
+      border: none;
+      .el-collapse-item {
+        &__wrap {
+          background-color: #e4f5ef;
+        }
+        &__header {
+          background-color: #e4f5ef;
+        }
+        &__content {
+          background-color: #e4f5ef;
+          border: none;
+          padding-bottom: 10px;
+        }
+      }
+    }
+    .list-wrap {
+      max-height: calc(100vh - 288px);
+      overflow: scroll;
+      margin-bottom: -16px;
+      width: 100%;
+      .book-list {
+        width: 100%;
+        :deep(.el-radio) {
+          background-color: #fff;
+          width: 100%;
+          margin: 0 0 10px 0;
+          .el-radio__label {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+          }
+          .el-radio__input {
+            display: none;
+          }
+        }
+        :deep(.el-radio.is-bordered){
+          border: none;
+        }
+        :deep(.el-radio.is-bordered + .el-radio.is-bordered) {
+          margin-left: 0px;
+        }
+        :deep(.el-radio.is-bordered.is-checked){
+          background-color: var(--el-color-primary);
+          .el-radio__label{
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  &-bottom {
+    text-align: center;
+    padding-top: 10px;
+    box-shadow: 0 -10px 10px -16px rgba($color: #000000, $alpha: 0.4);
+  }
+}
+</style>

@@ -1,0 +1,29 @@
+{
+  "name": "send-to-flomo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^1.1.0",
+    "axios": "^1.2.1",
+    "cheerio": "^1.0.0-rc.12",
+    "dexie": "^3.2.2",
+    "element-plus": "^1.1.0-beta.18",
+    "md5": "^2.3.0",
+    "vue": "^3.2.37",
+    "vue-i18n": "^9.2.2",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.1.0",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "sass": "^1.56.2",
+    "vite": "^3.0.2"
+  }
+}
