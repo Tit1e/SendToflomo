@@ -10,8 +10,10 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+package-lock.json
 *.local
 scr-tauri/target
+scr-tauri/Cargo.lock
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
