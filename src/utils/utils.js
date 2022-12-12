@@ -1,19 +1,9 @@
 import { toRaw } from 'vue'
-import store from '@/store'
-const isTauri = store.getters.isTauri
-let ipcRenderer = {}
-let shell = {}
-if(isTauri){
-  // shell = require('@electron/remote').shell
-  // ipcRenderer = require('electron').ipcRenderer
-}
-
+import { open } from '@tauri-apps/api/shell'
 
 export function openUrl(url){
   if(!url) return false
-  if(isTauri){
-    shell.openExternal(url)
-  }
+  open(url)
 }
 
 
