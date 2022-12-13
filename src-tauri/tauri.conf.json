@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "SendToflomo",
-    "version": "0.0.18"
+    "version": "0.0.24"
   },
   "tauri": {
     "macOSPrivateApi": true,
