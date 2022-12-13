@@ -9,13 +9,8 @@ import store from '@/store/index.js'
 
 import '@/assets/css/index.scss'
 
-import { checkUpdate } from '@tauri-apps/api/updater';
-checkUpdate().then(res => {
-  console.log(res)
-}).catch(e => {
-  console.log(e)
-})
-console.log(111)
+
+
 const app = createApp(App)
 app.use(ElementPlus)
 app.use(VueI18n)
