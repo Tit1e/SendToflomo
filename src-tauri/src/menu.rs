@@ -14,13 +14,18 @@ pub fn init(_context: &Context<EmbeddedAssets>) -> Menu {
         Menu::new()
           .add_item(CustomMenuItem::new("about".to_string(), about).disabled().into())
           .add_native_item(MenuItem::Separator)
+            .add_item(
+              CustomMenuItem::new("reload".to_string(), "刷新")
+                .accelerator("CmdOrCtrl+R"),
+            )
+          .add_native_item(MenuItem::Separator)
           .add_item(
             CustomMenuItem::new("restart".to_string(), "重启应用")
             .accelerator("CmdOrCtrl+Shift+R"),
           )
           .add_native_item(MenuItem::Separator)
           .add_item(
-            CustomMenuItem::new("dev_tools".to_string(), "打开控制台")
+            CustomMenuItem::new("dev_tools".to_string(), "控制台")
                 .accelerator("F12"),
           )
           .add_native_item(MenuItem::Separator)
@@ -38,6 +43,7 @@ pub fn handler(event: WindowMenuEvent<tauri::Wry>) {
   let app = win.app_handle();
   match event.menu_item_id() {
     "restart" => tauri::api::process::restart(&app.env()),
+    "reload" => win.eval("window.location.reload()").unwrap(),
     "dev_tools" => {
       win.open_devtools();
       win.close_devtools();
