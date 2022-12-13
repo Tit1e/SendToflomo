@@ -42,13 +42,13 @@ async function updater() {
     notes: updatelog(tag.name),
     pub_date: new Date().toISOString(),
     platforms: {
-      win64: { signature: '', url: '' }, // compatible with older formats
-      linux: { signature: '', url: '' }, // compatible with older formats
+      // win64: { signature: '', url: '' }, // compatible with older formats
+      // linux: { signature: '', url: '' }, // compatible with older formats
       darwin: { signature: '', url: '' }, // compatible with older formats
       'darwin-aarch64': { signature: '', url: '' },
       'darwin-x86_64': { signature: '', url: '' },
-      'linux-x86_64': { signature: '', url: '' },
-      'windows-x86_64': { signature: '', url: '' },
+      // 'linux-x86_64': { signature: '', url: '' },
+      // 'windows-x86_64': { signature: '', url: '' },
       // 'windows-i686': { signature: '', url: '' }, // no supported
     },
   };
