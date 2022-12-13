@@ -40,6 +40,8 @@ import { dexiePut } from '@/db/dexie'
 import { delField} from '@/utils/utils'
 import { Loading, testFile } from '@/utils/index.js'
 import { useI18n } from 'vue-i18n'
+// import checkUpdate from "@/utils/checkUpdate"
+// checkUpdate()
 const { t } = useI18n()
 
 let loadingInstance = null
