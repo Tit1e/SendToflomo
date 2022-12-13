@@ -9,7 +9,6 @@ import { invoke } from "@tauri-apps/api/tauri";
 export async function readSQLite({ books = '{}', notes = '[]' }) {
   try {
     const { Books = [] } = JSON.parse(books)
-    console.log(Books)
     const allnotes = JSON.parse(notes)
     if (Books && Books.length) {
       books = Books

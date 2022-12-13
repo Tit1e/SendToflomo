@@ -29,17 +29,15 @@ import readFile from '@/utils/readFile.js'
 import readJSON from '@/utils/readJSON.js'
 import paresClip from '@/utils/paresClip.js'
 import parseAppleBooks from '@/utils/parseAppleBooks.js'
-// import readSQLite from '@/utils/readSQLite.js'
 import {
   ref,
-  computed,
+  computed
 } from 'vue'
 import { ElMessage, ElLoading } from 'element-plus'
 import addMemo from '@/utils/addMemo'
 import { useStore } from 'vuex'
 import { dexiePut } from '@/db/dexie'
 import { delField} from '@/utils/utils'
-
 import { Loading, testFile } from '@/utils/index.js'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
