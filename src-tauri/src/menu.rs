@@ -19,6 +19,11 @@ pub fn init(_context: &Context<EmbeddedAssets>) -> Menu {
             .accelerator("CmdOrCtrl+Shift+R"),
           )
           .add_native_item(MenuItem::Separator)
+          .add_item(
+            CustomMenuItem::new("dev_tools".to_string(), "打开控制台")
+                .accelerator("F12"),
+          )
+          .add_native_item(MenuItem::Separator)
           .add_item(CustomMenuItem::new("quit".to_string(), "退出").accelerator("CmdOrCtrl+Q").into())
     );
 
@@ -33,6 +38,10 @@ pub fn handler(event: WindowMenuEvent<tauri::Wry>) {
   let app = win.app_handle();
   match event.menu_item_id() {
     "restart" => tauri::api::process::restart(&app.env()),
+    "dev_tools" => {
+      win.open_devtools();
+      win.close_devtools();
+    }
     "quit" => {
       std::process::exit(0);
     }
