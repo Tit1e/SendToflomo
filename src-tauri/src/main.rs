@@ -89,6 +89,7 @@ fn main() {
     let context = tauri::generate_context!();
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![get_apple_books])
+        .plugin(tauri_plugin_positioner::init())
         .menu(menu::init(&context))
         .on_menu_event(menu::handler)
         .run(context)

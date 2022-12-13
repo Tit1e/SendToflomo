@@ -16,7 +16,7 @@
     "axios": "^1.2.1",
     "cheerio": "^1.0.0-rc.12",
     "dexie": "^3.2.2",
-    "element-plus": "^1.1.0-beta.18",
+    "element-plus": "^1.1.0-beta.24",
     "md5": "^2.3.0",
     "vue": "^3.2.37",
     "vue-i18n": "^9.2.2",
@@ -24,11 +24,11 @@
   },
   "devDependencies": {
     "@actions/github": "^5.1.1",
-    "@tauri-apps/cli": "^1.1.0",
-    "@vitejs/plugin-vue": "^3.0.1",
+    "@tauri-apps/cli": "^1.2.2",
+    "@vitejs/plugin-vue": "^4.0.0",
     "node-fetch": "^3.3.0",
     "sass": "^1.56.2",
-    "vite": "^3.0.2"
+    "vite": "^4.0.1"
   },
   "engines": {
     "npm": ">=14"
