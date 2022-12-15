@@ -22,3 +22,8 @@
 .el-radio-button:focus:not(.is-focus):not(:active):not(.is-disabled){
   box-shadow: none!important;
 }
+.el-drawer{
+  &__header{
+    margin-bottom: 0px;
+  }
+}

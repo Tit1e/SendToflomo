@@ -10,17 +10,22 @@
 }
 
 :root{
-    --el-popup-modal-opacity: 0.3;
+    --el-popup-modal-opacity: 0.2;
+    --el-font-size-base: 12px!important;
+    --default-bg: #fff;
+    --default-text: #303133;
 }
 
 * {
   font-family: 'DIN-Regular', 'PingFang SC', Helvetica, Arial, sans-serif !important;
   outline: none;
+  box-sizing: border-box;
 }
 
 
 html,
 body {
+  color: var(--default-text);
   height: 100%;
   margin: 0;
 
@@ -206,5 +211,11 @@ body {
   }
   .block-center{
     margin: 0 auto;
+  }
+  .no-select{
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
   }
 }
