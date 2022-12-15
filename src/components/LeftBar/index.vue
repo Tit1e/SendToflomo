@@ -1,11 +1,11 @@
 <template>
-  <div class="left-bar" :class="{ 'pt-10': !isTauri, electron: isTauri }">
+  <div class="left-bar no-select" :class="{ 'pt-10': !isTauri, electron: isTauri }">
     <div class="drag-bar" data-tauri-drag-region></div>
     <div class="left-bar-form">
       <el-form
         :model="options"
         ref="form"
-        size="mini"
+        size="default"
         label-suffix="："
         label-position="top"
       >
@@ -55,7 +55,7 @@
                     v-model="options.api"
                     type="password"
                     show-password
-                    placeholder="API 采用本地存储"
+                    :placeholder="t('api-record')"
                   ></el-input>
                 </el-form-item>
                 <el-divider>{{ t('tag-options') }}</el-divider>
@@ -65,7 +65,7 @@
                       <el-input
                         v-model="options.tag"
                         :disabled="options.noTag"
-                        placeholder="Tag 名称"
+                        :placeholder="t('tag-name')"
                         clearable
                       ></el-input>
                     </div>
@@ -87,7 +87,7 @@
                       }}</el-radio-button>
                     </el-radio-group>
                   </el-form-item>
-                  <el-form-item label="空行">
+                  <el-form-item :label="t('blank-line')">
                     <el-radio-group v-model="options.noEmptyLine">
                       <el-radio-button :label="false">{{
                         t('on')
@@ -99,21 +99,20 @@
                   </el-form-item>
                 </template>
                 <el-divider>{{ t('notes-options') }}</el-divider>
-                <el-form-item label="位置">
+                <el-form-item :label="t('position-of-tag')">
                   <el-radio-group v-model="options.notePosition">
-                    <el-radio-button :label="true">摘录上方</el-radio-button>
-                    <el-radio-button :label="false">摘录下方</el-radio-button>
+                    <el-radio-button :label="true">{{t('above-the-excerpt')}}</el-radio-button>
+                    <el-radio-button :label="false">{{t('below-the-excerpt')}}</el-radio-button>
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item label="分隔符">
+                <el-form-item :label="t('separatist')">
                   <el-input
                     v-model="options.split"
-                    placeholder="为空以空行填充，此空行无法禁用"
+                    :placeholder="t('separatist-placeholder')"
                     clearable
                   ></el-input>
-                  <span class="fz-12"
-                    ><b class="highlight">仅在有笔记时生效</b
-                    >，且总在笔记与摘录之间</span
+                  <span class="fz-12 separatist-tip"
+                    >{{t('separatist-tip')}}</span
                   >
                 </el-form-item>
               </el-collapse-item>
@@ -133,7 +132,7 @@
                       <el-radio-group
                         class="book-list"
                         v-model="options.title"
-                        size="small"
+                        size="default"
                         @change="selectChange"
                       >
                         <el-radio
@@ -165,13 +164,13 @@
           "
           placement="top"
         >
-          <el-button type="primary" :disabled="disabledSend"  size="mini">{{
+          <el-button type="primary" :disabled="disabledSend"  size="small">{{
             t('import')
           }}</el-button>
         </el-tooltip>
       </template>
       <template v-else>
-        <el-button type="primary"  size="mini" @click="submit">{{
+        <el-button type="primary"  size="small" @click="submit">{{
           t('import')
         }}</el-button>
       </template>
@@ -441,10 +440,6 @@ function computedTag () {
   background-color: #e4f5ef;
   display: flex;
   flex-direction: column;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
   padding: 10px;
   position: relative;
   .drag-bar{
@@ -469,8 +464,12 @@ function computedTag () {
         &__label {
           padding-bottom: 4px;
         }
-        &--mini {
+        &--default {
           margin-bottom: 8px;
+        }
+        .separatist-tip{
+          line-height: 1.5em;
+          margin-top: 4px;
         }
       }
     }
@@ -481,7 +480,7 @@ function computedTag () {
       &-body {
         height: 0;
         flex: 1;
-        overflow: hidden;
+        overflow: auto;
       }
     }
     :deep(.el-divider) {
@@ -494,9 +493,11 @@ function computedTag () {
       .el-collapse-item {
         &__wrap {
           background-color: #e4f5ef;
+          border-bottom: none!important;
         }
         &__header {
           background-color: #e4f5ef;
+          border-bottom: none!important;
         }
         &__content {
           background-color: #e4f5ef;
@@ -506,14 +507,14 @@ function computedTag () {
       }
     }
     .list-wrap {
-      max-height: calc(100vh - 288px);
+      max-height: calc(100vh - 306px);
       overflow: scroll;
       margin-bottom: -16px;
       width: 100%;
       .book-list {
         width: 100%;
         :deep(.el-radio) {
-          background-color: #fff;
+          background-color: var(--default-bg);
           width: 100%;
           margin: 0 0 10px 0;
           .el-radio__label {

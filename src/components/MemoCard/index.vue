@@ -4,8 +4,8 @@
   @click="toggleChecked">
     <a v-if="(info.assetid && info.localtion)" :href="`ibooks://assetid/${info.assetid}#${info.localtion}`" class="book-mark" @click.stop title="在 Apple Books 中查看">
     </a>
-    <div class="num-icon" :data-index="index + 1" @click="e => resetMemo(e, props.info)">{{(showUploaded || showEdit) ? '' : index + 1}}</div>
-    <div class="priview">
+    <div class="num-icon no-select" :data-index="index + 1" @click="e => resetMemo(e, props.info)">{{(showUploaded || showEdit) ? '' : index + 1}}</div>
+    <div class="priview no-select">
       <pre v-html="info.content_update || info.content"></pre>
     </div>
   </div>
@@ -76,7 +76,6 @@ function toggleChecked(){
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 10px 6px rgba($color: #000000, $alpha: 0.03);
-  box-sizing: border-box;
   max-height: 300px;
   padding: 10px;
   position: relative;
@@ -103,7 +102,7 @@ function toggleChecked(){
     position: absolute;
     bottom: 10px;
     right: 10px;
-    background-color: #fff;
+    background-color: var(--default-bg);
     width: 30px;
     height: 30px;
     text-align: center;
@@ -114,10 +113,6 @@ function toggleChecked(){
     font-size: 18px;
     font-weight: bolder;
     z-index: 9;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
   }
   &.memo-icon{
     .num-icon{
@@ -178,10 +173,6 @@ function toggleChecked(){
     width: 100%;
     font-size: 14px;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    box-sizing: border-box;
     overflow: auto;
     flex: 1;
     pre {
