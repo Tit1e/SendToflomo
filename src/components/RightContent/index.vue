@@ -27,7 +27,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
     >
-      <el-input v-model="activeItem.content_temp" type="textarea" :autosize="{ minRows: 16, maxRows: 36 }" placeholder="" clearable></el-input>
+      <el-input class="memo-textarea" v-model="activeItem.content_temp" type="textarea" :autosize="{ minRows: 16, maxRows: 36 }" placeholder=""></el-input>
       <template #footer>
           <el-button @click="closeDialog" size="small" type="default">{{ t('cancel') }}</el-button>
           <el-button @click="save" size="small" type="primary">{{ t('save') }}</el-button>
@@ -239,6 +239,17 @@ function closeDialog(){
           border: none;
           text-align: justify;
         }
+      }
+    }
+  }
+  :deep(.memo-textarea){
+    .el-textarea__inner{
+      box-shadow: none;
+      &:hover{
+        box-shadow: none;
+      }
+      &:focus{
+        box-shadow: none;
       }
     }
   }
