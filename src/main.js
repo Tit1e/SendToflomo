@@ -10,9 +10,8 @@ import store from '@/store/index.js'
 import '@/assets/css/index.scss'
 
 
-
 const app = createApp(App)
-app.use(ElementPlus)
+app.use(ElementPlus, { size: 'small', zIndex: 3000 })
 app.use(VueI18n)
 app.use(store)
 app.mount('#app')
