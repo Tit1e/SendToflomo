@@ -5,13 +5,13 @@
         <div class="qr-code alipay">
           <img src="../../assets/img/alipay.JPG" alt="" srcset="">
           <div class="text-center">
-            支付宝
+            {{t('alipay')}}
           </div>
         </div>
         <div class="qr-code wechat">
           <img src="../../assets/img/wechat.JPG" alt="" srcset="">
           <div class="text-center">
-            微信
+            {{t('wechat-pay')}}
           </div>
         </div>
       </div>

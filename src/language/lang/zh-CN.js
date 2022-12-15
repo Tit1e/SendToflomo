@@ -1,8 +1,26 @@
-export default  {
-  'parse': '解析',
+const ByMeACoffee = {
+  'alipay': '支付宝',
+  'wechat-pay': '微信支付',
+}
+const Help = {
+  'help': '常见问题解答',
+  'warning': '注意事项',
+  'warning-1': '导入前必须填写 Api 与选择要导入的笔记',
+  'warning-2': '双击笔记可进入编辑状态，编辑过的笔记右下角显示编辑图标',
+  'warning-3': '已导入的笔记右下角显示 flomo 图标，且不可再编辑',
+  'warning-4': '点击右下角图标可还原内容，重置笔记状态',
+  'warning-5': '已导入或编辑过的笔记将不再参与格式调整，如需调整请先重置笔记状态',
+  'file': '文件格式',
+  'json-file': 'KOReader 导出的 JSON 文件',
+  'json-file': 'Kindle 或 Kindle App 导出的 HTML 文件',
+  'json-file': 'Kindle 中的 My Clippings.txt 文件',
+  'where-is-txt': 'My Clippings.txt 在哪？',
+  'where-is-txt-1': '将 Kindle 通过数据线连接至电脑',
+  'where-is-txt-2': '文件位于：Kindle根目录 - document - My Clippings.txt',
+  'other-questions': '还有其他问题？扫码进群反馈',
   'how-export': '如何导出 HTML？',
-  'questions-and-answers': '常见问题解答',
-  'weread': '微信读书',
+}
+const LeftBar = {
   'parse-options': '解析设置',
   'tag-name': 'Tag 名称',
   'hide-tag': '隐藏 Tag',
@@ -24,45 +42,47 @@ export default  {
   'separatist-placeholder': '为空则以空行填充，此空行无法禁用',
   'tag-options': 'Tag 设置',
   'notes-options': '笔记设置',
-  'reading-notes': '正在读取',
-  'thanks': '感谢 lupeng',
+}
+const MemoCard = {
+  'view-in-apple-books': '在 Apple Books 中查看'
+}
+const RightContent = {
+  'save': '保 存',
+  'cancel': '取 消',
+}
+const RightContentBar = {
+  'import-tip': '未经审视的生活不值得过，未经审视的思想也不应该汇入你的大脑。建议在导入前审视一遍内容。',
   'all': '全选',
   'not-all': '全不选',
   'selected': '已选：',
   'imported': '已导入',
-  'check-update': '检查更新',
+  'put-on-the-top': '置顶',
+  'copy-md': '复制 Markdown 文本',
+  'export-md': '导出 Markdown',
+  'export-csv': '导出 CSV',
+  'setting': '设置',
+}
+const Setting = {
+  'thanks': '感谢 lupeng',
   'github': 'GitHub',
   'blog': '博客',
   'photo': "Tit1e's Photo Studio",
   'jike': '即刻',
-  'help': '帮助',
-  'save': '保 存',
-  'cancel': '取 消',
-  'setting': '设置',
-  'help': '常见问题解答',
   'buy-me-a-coffee': '请作者喝杯咖啡',
   'lang': '语言',
   'about': '关于',
   'update': '更新',
   'check-update': '检查更新',
   'auto-check': '自动检查更新',
-  'warning': '注意事项',
-  'warning-1': '导入前必须填写 Api 与选择要导入的笔记',
-  'warning-2': '双击笔记可进入编辑状态，编辑过的笔记右下角显示编辑图标',
-  'warning-3': '已导入的笔记右下角显示 flomo 图标，且不可再编辑',
-  'warning-4': '点击右下角图标可还原内容，重置笔记状态',
-  'warning-5': '已导入或编辑过的笔记将不再参与格式调整，如需调整请先重置笔记状态',
-  'file': '文件格式',
-  'json-file': 'KOReader 导出的 JSON 文件',
-  'json-file': 'Kindle 或 Kindle App 导出的 HTML 文件',
-  'json-file': 'Kindle 中的 My Clippings.txt 文件',
-  'where-is-txt': 'My Clippings.txt 在哪？',
-  'where-is-txt-1': '将 Kindle 通过数据线连接至电脑',
-  'where-is-txt-2': '文件位于：Kindle根目录 - document - My Clippings.txt',
-  'other-questions': '还有其他问题？扫码进群反馈',
-  'copy-md': '复制 Markdown 文本',
-  'export-md': '导出 Markdown',
-  'export-csv': '导出 CSV',
-  'put-on-the-top': '置顶',
-  'import-tip': '未经审视的生活不值得过，未经审视的思想也不应该汇入你的大脑。建议在导入前审视一遍内容。'
+
+}
+export default {
+  'reading-notes': '正在读取',
+  ...ByMeACoffee,
+  ...Help,
+  ...LeftBar,
+  ...MemoCard,
+  ...RightContent,
+  ...RightContentBar,
+  ...Setting,
 }

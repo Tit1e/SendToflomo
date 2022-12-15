@@ -2,7 +2,7 @@
   <div class="memo-card radius memo-icon"
   :class="{ active: props.info.checked, empty: props.info.isEmpty, 'uploaded': showUploaded, 'edit': showEdit, 'num-cover': showUploaded || showEdit }"
   @click="toggleChecked">
-    <a v-if="(info.assetid && info.localtion)" :href="`ibooks://assetid/${info.assetid}#${info.localtion}`" class="book-mark" @click.stop title="在 Apple Books 中查看">
+    <a v-if="(info.assetid && info.localtion)" :href="`ibooks://assetid/${info.assetid}#${info.localtion}`" class="book-mark" @click.stop :title="t('view-in-apple-books')">
     </a>
     <div class="num-icon no-select" :data-index="index + 1" @click="e => resetMemo(e, props.info)">{{(showUploaded || showEdit) ? '' : index + 1}}</div>
     <div class="priview no-select">
@@ -13,7 +13,9 @@
 
 <script setup>
 import { computed } from 'vue'
-import {ElMessageBox} from 'element-plus'
+import { ElMessageBox } from 'element-plus'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const props = defineProps({
   info: {
     type: Object,
