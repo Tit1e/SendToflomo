@@ -175,47 +175,12 @@
         }}</el-button>
       </template>
     </div>
-    <!-- 微信登陆弹窗 -->
-    <el-dialog
-      custom-class="login-dialog"
-      v-model="showDialog"
-      :close-on-click-modal="false"
-      append-to-body
-      destroy-on-close
-      width="270px"
-    >
-      <div class="iframe-box" v-loading="loading">
-        <iframe
-          v-if="showDialog"
-          src="https://weread.qq.com/#login"
-          frameborder="0"
-        ></iframe>
-      </div>
-      <div class="text-center" v-show="!loading">
-        <el-button
-          type="text"
-          style="color: #999999;"
-          @click="showDialog = false"
-          >取消</el-button
-        >
-        <el-button type="text" @click="GetNotebooklist">我已登录</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 <script setup>
 import { dexiePut } from '@/db/dexie.js'
-import { ref, reactive, computed, onMounted, watch } from 'vue'
-import init from '@/utils/init.js'
-import { openUrl } from '@/utils/utils.js'
-import {Loading} from '@/utils/index.js'
-
-import {
-  getNotebooklist,
-  getBookMarkList,
-  getReviewList
-} from '@/utils/weread.js'
+import { ref, reactive, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
@@ -298,57 +263,12 @@ watch(
   { deep: true }
 )
 
-async function getWereadNotes(books, needSort = true, loadingInstance) {
-  const _books = books.reverse()
-  const {bookId, title} = _books[0]
-  const ReviewList = getReviewList({
-    title,
-    bookId,
-    listType: 11,
-    maxIdx: 0,
-    count: 0,
-    listMode: 2,
-    synckey: 0,
-    mine: 1
-  })
-  const BookMarkList = getBookMarkList(bookId, title)
-  try {
-    await Promise.all([ReviewList, BookMarkList])
-    if(!needSort){
-      await init(bookList.value.map(item => item.title).reverse(), true)
-    }else{
-      await init(_books.map(item => item.title), needSort)
-    }
-    loadingInstance.close()
-  } catch (error) {
-    console.log(error)
-    if(error.errcode === -2012){
-      importWeRead()
-    }
-    loadingInstance.close()
-  }
-}
-
 function selectChange (val) {
   const data = bookList.value.find(i => i.title === val)
   if (!data) return false
-
-  if (data.bookId) {
-    const loadingInstance = Loading({text: t('reading-notes')})
-    getWereadNotes([data], false, loadingInstance)
-  }
   updateData(data)
 }
 
-function handleBooksData (_bookList) {
-  store.commit('SET_BOOK_LIST', _bookList)
-  const data = _bookList[0]
-  if(data){
-    // 微信读书获取第一本书的内容
-    if (data.bookId) selectChange(data.title)
-    updateData(data)
-  }
-}
 
 function updateData (data) {
   const { title, texts, bookId, book } = data
@@ -358,41 +278,7 @@ function updateData (data) {
   $emit('list-update', { list: texts, options })
   parse(true)
 }
-// weread
-const showDialog = ref(false)
-const loading = ref(false)
-function GetNotebooklist (loadingInstance) {
-  getNotebooklist()
-    .then(books => {
-      showDialog.value = false
-      loading.value = false
-      getWereadNotes(books, true, loadingInstance)
-    })
-    .catch(err => {
-      console.log(err)
-      loading.value = false
-      loadingInstance.close()
-    })
-}
-function importWeRead () {
-  showDialog.value = true
-  loading.value = true
-  const loadingInstance = Loading({text: t('reading-notes')})
-  GetNotebooklist(loadingInstance)
-}
 
-
-// Apple Books
-function importAppleBooks () {
-  const loadingInstance = Loading({text: t('reading-notes')})
-  // readSQLite()
-  //   .then(() => {
-  //     loadingInstance.close()
-  //   }).catch(e => {
-  //     ElMessage.error(e)
-  //     loadingInstance.close()
-  //   })
-}
 function parse (showBookList = false) {
   if (showBookList) {
     activeName.value = '2'

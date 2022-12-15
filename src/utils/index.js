@@ -7,7 +7,7 @@ export const copy = async (text, msg = '已复制') => {
     if(msg) ElMessage.success(msg)
     return true
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return Promise.reject()
   }
 }
