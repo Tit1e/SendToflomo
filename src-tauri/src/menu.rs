@@ -31,9 +31,21 @@ pub fn init(_context: &Context<EmbeddedAssets>) -> Menu {
           .add_native_item(MenuItem::Separator)
           .add_item(CustomMenuItem::new("quit".to_string(), "退出").accelerator("CmdOrCtrl+Q").into())
     );
+    let edit_menu = Submenu::new(
+      "编辑",
+      Menu::new()
+        .add_native_item(MenuItem::Undo)
+        .add_native_item(MenuItem::Redo)
+        .add_native_item(MenuItem::Separator)
+        .add_native_item(MenuItem::Cut)
+        .add_native_item(MenuItem::Copy)
+        .add_native_item(MenuItem::Paste)
+        .add_native_item(MenuItem::SelectAll),
+    );
 
     Menu::new()
         .add_submenu(app_menu)
+        .add_submenu(edit_menu)
 }
 
 // 应用菜单处理事件
