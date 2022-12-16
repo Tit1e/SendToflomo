@@ -37,13 +37,21 @@ import { ElMessage, ElLoading } from 'element-plus'
 import addMemo from '@/utils/addMemo'
 import { useStore } from 'vuex'
 import { dexiePut } from '@/db/dexie'
-import { delField} from '@/utils/utils'
+import { delField } from '@/utils/utils'
+import { isAutoUpdate } from '@/utils/index.js'
+import checkUpdate from '@/utils/checkUpdate.js'
 import { Loading, testFile } from '@/utils/index.js'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
+const store = useStore()
+
 
 let loadingInstance = null
-
+if (isAutoUpdate()) {
+  // 触发自动更新
+  checkUpdate()
+}
+// 自动读取 Apple Books 笔记
 parseAppleBooks()
 
 function handleFile(file, ext = '') {
@@ -104,7 +112,6 @@ const dropEvent = event => {
 
 
 
-const store = useStore()
 const bookSort = JSON.parse(localStorage.getItem('bookSort') || '[]').reverse()
 init(bookSort)
 
@@ -136,7 +143,7 @@ async function sendMemo (url, list, _index) {
   loading.value.setText(loadingText)
   try {
     const item = list[_index]
-    const { code, message } = await addMemo(url, item.content_update || item.content)
+    const { data: {code, message} } = await addMemo(url, item.content_update || item.content)
     if(code === 0){
       item.uploaded = true
       item.checked = false

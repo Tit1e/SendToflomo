@@ -38,3 +38,9 @@ export const testFile = (name) => {
   if (whiteExt.includes(ext)) return ext
   return ''
 }
+
+export const isAutoUpdate = () => {
+  const val = window.localStorage.getItem('autoUpdate')
+  if (val === 'true' || val === null) return true
+  return false
+}
