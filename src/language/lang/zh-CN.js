@@ -4,23 +4,31 @@ const ByMeACoffee = {
 }
 const Help = {
   'help': '常见问题解答',
-  'warning': '注意事项',
-  'warning-1': '导入前必须填写 Api 与选择要导入的笔记',
-  'warning-2': '双击笔记可进入编辑状态，编辑过的笔记右下角显示编辑图标',
-  'warning-3': '已导入的笔记右下角显示 flomo 图标，且不可再编辑',
-  'warning-4': '点击右下角图标可还原内容，重置笔记状态',
-  'warning-5': '已导入或编辑过的笔记将不再参与格式调整，如需调整请先重置笔记状态',
+  'warning': '使用说明',
+  'warning-1': '将 txt、html、json 文件拖入应用，软件自动解析',
+  'warning-2': 'Apple Books 在软件启动时会自动读取，无需手动触发',
+  'warning-3': '导入前必须填写 Api 与选择要导入的笔记',
+  'warning-4': '双击笔记可进入编辑状态，编辑过的笔记右下角显示编辑图标',
+  'warning-5': '已导入的笔记右下角显示 flomo 图标，且不可再编辑',
+  'warning-6': '点击右下角图标可还原内容，重置笔记状态',
+  'warning-7': '已导入或编辑过的笔记将不再参与格式调整，如需调整请先重置笔记状态',
   'file': '文件格式',
   'json-file': 'KOReader 导出的 JSON 文件',
-  'json-file': 'Kindle 或 Kindle App 导出的 HTML 文件',
-  'json-file': 'Kindle 中的 My Clippings.txt 文件',
+  'html-file': 'Kindle 或 Kindle App 导出的 HTML 文件',
+  'txt-file': 'Kindle 中的 My Clippings.txt 文件',
   'where-is-txt': 'My Clippings.txt 在哪？',
   'where-is-txt-1': '将 Kindle 通过数据线连接至电脑',
   'where-is-txt-2': '文件位于：Kindle根目录 - document - My Clippings.txt',
   'other-questions': '还有其他问题？扫码进群反馈',
   'how-export': '如何导出 HTML？',
+  'why-few-book': '为什么 Apple Books 笔记数量偏少？',
+  'handle-few-book': '数据未同步导致，打开 Apple Books，将未同步的书本进行双击打开，然后重启 SendToflomo。'
 }
 const LeftBar = {
+  'click-to-download': '点击下载应用',
+  'import-from-apple-books': '从 Apple Books 导入',
+  'download-reason': '由于 Apple Books 笔记的读取方式限制，请安装客户端使用。',
+  'can-not-open': "SendToflomo.app 打不开？",
   'parse-options': '解析设置',
   'tag-name': 'Tag 名称',
   'hide-tag': '隐藏 Tag',
@@ -55,7 +63,7 @@ const RightContentBar = {
   'all': '全选',
   'not-all': '全不选',
   'selected': '已选：',
-  'imported': '已导入',
+  'imported': '已导入：',
   'put-on-the-top': '置顶',
   'copy-md': '复制 Markdown 文本',
   'export-md': '导出 Markdown',
@@ -63,6 +71,9 @@ const RightContentBar = {
   'setting': '设置',
 }
 const Setting = {
+  'update-by-yourself': '手动更新',
+  'release': 'Release',
+  'netdisc': '网盘',
   'thanks': '感谢 lupeng',
   'github': 'GitHub',
   'blog': '博客',
@@ -74,7 +85,6 @@ const Setting = {
   'update': '更新',
   'check-update': '检查更新',
   'auto-check': '自动检查更新',
-
 }
 export default {
   'reading-notes': '正在读取',

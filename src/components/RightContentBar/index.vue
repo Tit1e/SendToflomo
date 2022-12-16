@@ -36,7 +36,7 @@
       <div class="help k-icon" @click="showDrawer('help')"></div>
       <div class="setting k-icon ml-16" @click="showDrawer('setting')"></div>
     </div>
-    <el-drawer v-model="drawer" :title="t(currentDrawer)" :with-header="true" :show-close="false" :modal="true">
+    <el-drawer v-model="drawer" :title="t(currentDrawer)" :with-header="true" :show-close="false" :modal="true" :size="360">
       <component :is='comp'></component>
     </el-drawer>
   </div>
@@ -55,7 +55,7 @@ const compMap = {
   'setting': Setting
 }
 const drawer = ref(false)
-const currentDrawer = ref('')
+const currentDrawer = ref('help')
 const comp = shallowRef(Help)
 const showDrawer = type => {
   currentDrawer.value = type

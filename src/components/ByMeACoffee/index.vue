@@ -1,15 +1,17 @@
 <template>
+  <img class="hide" src="https://personal-1251959693.cos.ap-chengdu.myqcloud.com/2022-12-15-alipay.jpg" alt="" srcset="">
+  <img class="hide" src="https://personal-1251959693.cos.ap-chengdu.myqcloud.com/2022-12-15-wechat.jpg" alt="" srcset="">
   <el-tooltip placement="top" effect="light">
     <template #content>
       <div class="qrcode-box flex">
         <div class="qr-code alipay">
-          <img src="../../assets/img/alipay.JPG" alt="" srcset="">
+          <img src="https://personal-1251959693.cos.ap-chengdu.myqcloud.com/2022-12-15-alipay.jpg" alt="" srcset="">
           <div class="text-center">
             {{t('alipay')}}
           </div>
         </div>
         <div class="qr-code wechat">
-          <img src="../../assets/img/wechat.JPG" alt="" srcset="">
+          <img src="https://personal-1251959693.cos.ap-chengdu.myqcloud.com/2022-12-15-wechat.jpg" alt="" srcset="">
           <div class="text-center">
             {{t('wechat-pay')}}
           </div>

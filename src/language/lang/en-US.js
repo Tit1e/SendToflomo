@@ -5,11 +5,13 @@ const ByMeACoffee = {
 const Help = {
   'help': 'Help',
   'warning': 'Warning',
-  'warning-1': 'Before importing, you must fill in the API and select the notes to be imported',
-  'warning-2': 'Double-clicking on a note enters edit mode, and an edited note shows an edit icon in the lower right corner',
-  'warning-3': 'Imported notes show a flomo icon in the lower right corner and cannot be edited',
-  'warning-4': "Clicking the icon in the lower right corner restores the content and resets the note's status",
-  'warning-5': "Imported or edited notes will no longer participate in formatting adjustments, please reset the note's status if you need to adjust it",
+  'warning-1': 'Drag txt, html, json files into the application, and the software will automatically parse them',
+  'warning-2': 'Apple Books are automatically read when the software starts, no manual triggering required',
+  'warning-3': 'Before importing, you must fill in the API and select the notes to be imported',
+  'warning-4': 'Double-clicking on a note enters edit mode, and an edited note shows an edit icon in the lower right corner',
+  'warning-5': 'Imported notes show a flomo icon in the lower right corner and cannot be edited',
+  'warning-6': "Clicking the icon in the lower right corner restores the content and resets the note's status",
+  'warning-7': "Imported or edited notes will no longer participate in formatting adjustments, please reset the note's status if you need to adjust it",
   'file': 'File',
   'json-file': 'Exported by KO Reader',
   'html-file': 'Exported by Kindle or Kindle App',
@@ -19,8 +21,14 @@ const Help = {
   'where-is-txt-2': 'The file is located at: Kindle root directory - document - My Clippings.txt',
   'other-questions': 'Feedback by WeCom',
   'how-export': 'How to export HTML?',
+  'why-few-book': 'Why are there fewer notes in Apple Books?',
+  'handle-few-book': 'This is caused by unsynchronized data. Open Apple Books, double-click the unsynchronized book to open it, and then restart SendToflomo.'
 }
 const LeftBar = {
+  'click-to-download': 'Click to download the application',
+  'download-reason': 'Due to limitations of Apple Books, please install the client.',
+  'import-from-apple-books': 'Import from Apple Books',
+  'can-not-open': "Can't open SendToflomo.app?",
   'parse-options': 'Parse Options',
   'tag-name': 'Tag Name',
   'hide-tag': 'Hide Tag',
@@ -63,6 +71,9 @@ const RightContentBar = {
   'setting': 'Setting',
 }
 const Setting = {
+  'update-by-yourself': 'Update By Yourself',
+  'release': 'Release',
+  'netdisc': 'Netdisc',
   'lang': 'Language',
   'about': 'About',
   'update': 'Update',

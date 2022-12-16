@@ -7,6 +7,8 @@
       <li>{{t('warning-3')}}</li>
       <li>{{t('warning-4')}}</li>
       <li>{{t('warning-5')}}</li>
+      <li>{{t('warning-6')}}</li>
+      <li>{{t('warning-7')}}</li>
     </ol>
     <div class="help-title">{{t('file')}}</div>
     <ol>
@@ -27,6 +29,12 @@
         <li>{{t('where-is-txt-1')}}</li>
         <li>{{t('where-is-txt-2')}}</li>
       </ol>
+    </div>
+    <div class="mb-6 help-title">
+      {{t('why-few-book')}}
+    </div>
+    <div class="mb-10 pl-20">
+      {{ t('handle-few-book') }}
     </div>
     <div class="help-title mb-10">{{t('other-questions')}}</div>
     <img

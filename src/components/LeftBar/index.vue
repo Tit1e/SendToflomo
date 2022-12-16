@@ -12,32 +12,30 @@
         <div class="left-bar-form-content">
           <div class="left-bar-form-content-top">
             <el-form-item label-width="0" v-if="!isTauri">
-              <div class="pointer text-center border pd-10 radius">
+              <div class="pointer text-center border pd-10 radius download-app">
                 <el-tooltip effect="dark" placement="right">
                   <template #content>
-                    <div slot="content" style="line-height: 1.5em">
-                      <b>点击下载应用</b>
+                    <div slot="content" style="line-height: 1.5em;width: 250px;">
+                      <b>{{t('click-to-download')}}</b>
                       <br>
-                      由于 Apple Books 笔记的读取方式限制，
-                      <br>
-                      必须安装客户端才能使用。
+                      {{t('download-reason')}}
                     </div>
                   </template>
                   <a
                     class="link"
-                    href="https://github.com/Tit1e/kindle2Flomo/releases"
+                    href="https://github.com/Tit1e/SendToflomo/releases"
                     target="_blank"
                   >
-                    从 Apple Books 导入
+                    {{t('import-from-apple-books')}}
                   </a>
                 </el-tooltip>
               </div>
               <a
                 class="how link"
-                href="https://evolly.one/2021/05/30/158-mac-handle-bad-app/"
+                href="https://evolly.one/p/de983388.html"
                 target="_blank"
               >
-                Send2flomo.app 打不开？
+                {{t('can-not-open')}}
               </a>
             </el-form-item>
           </div>
@@ -363,6 +361,11 @@ function computedTag () {
       display: flex;
       flex-direction: column;
       height: 100%;
+      &-top{
+        .download-app{
+          width: 100%;
+        }
+      }
       &-body {
         height: 0;
         flex: 1;
