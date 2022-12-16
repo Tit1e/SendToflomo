@@ -1,7 +1,7 @@
 import { dexieList, dexieGetListByTitle } from '@/db/dexie'
 import { addField } from '@/utils/utils'
 import store from '@/store/index.js'
-async function init(sortList = [], sort = true) {
+async function init(sortList = []) {
   const books = await dexieList('books')
   const result = []
   for (let i = 0; i < books.length; i++) {
@@ -12,13 +12,14 @@ async function init(sortList = [], sort = true) {
       texts: addField(texts)
     })
   }
-  if (sort && sortList.length) {
-    for (let i = 0; i < sortList.length; i++) {
-      const item = sortList[i]
-      const index = result.findIndex(i => i.title === item)
-      result.unshift(result.splice(index, 1)[0])
-    }
-  }
+  // 取消排序功能
+  // if (sortList.length) {
+  //   for (let i = 0; i < sortList.length; i++) {
+  //     const item = sortList[i]
+  //     const index = result.findIndex(i => i.title === item)
+  //     result.unshift(result.splice(index, 1)[0])
+  //   }
+  // }
   store.commit('SET_BOOK_LIST', result)
   return result
 }
