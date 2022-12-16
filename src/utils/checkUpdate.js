@@ -14,8 +14,8 @@ export default async function handleCheckUpdate(loading) {
     if (status === 'DONE') {
       try {
         const action = await ElMessageBox.alert(
-          `是否立即重启安装？`,
-          '⏬ 下载完成',
+          `下载完成，是否立即重启？`,
+          '✨ 安装更新',
           {
             showClose: false,
             autofocus: false,
@@ -23,7 +23,7 @@ export default async function handleCheckUpdate(loading) {
             confirmButtonText: '立即重启',
             cancelButtonText: '以后再说',
             dangerouslyUseHTMLString: true,
-            customClass: 'uppdate-msg',
+            customClass: 'custom-msg-title',
           }
         )
         if (action === 'confirm') {
@@ -56,7 +56,7 @@ export default async function handleCheckUpdate(loading) {
           confirmButtonText: '立即下载',
           cancelButtonText: '以后再说',
           dangerouslyUseHTMLString: true,
-          customClass: 'uppdate-msg',
+          customClass: 'custom-msg-title',
         }
       )
       if (action === 'confirm') {
