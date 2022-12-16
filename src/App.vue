@@ -46,7 +46,6 @@ const { t } = useI18n()
 const store = useStore()
 
 
-let loadingInstance = null
 if (isAutoUpdate()) {
   // 触发自动更新
   checkUpdate()
@@ -54,7 +53,27 @@ if (isAutoUpdate()) {
 // 自动读取 Apple Books 笔记
 parseAppleBooks()
 
-function handleFile(file, ext = '') {
+let loadingInstance = null
+const parseNum = ref(0)
+const cover = ref(false)
+
+
+const dragenterEvent = (event) => {
+  event.stopPropagation();
+  event.preventDefault();
+}
+const dragoverEvent = (event) => {
+  event.stopPropagation();
+  event.preventDefault();
+  cover.value = true
+}
+const dragleaveEvent = (event) => {
+  event.stopPropagation();
+  event.preventDefault();
+  cover.value = false
+}
+
+const handleFile = (file, ext = '') => {
     if(!ext) return
     const reader = new FileReader()
     reader.onload = async () => {
@@ -68,32 +87,17 @@ function handleFile(file, ext = '') {
         if (ext === 'json') {
           await readJSON(reader.result)
         }
-        loadingInstance.close()
+        parseNum.value -= 1
+        if(parseNum.value === 0) loadingInstance.close()
       } catch (error) {
         console.log(`${file.name} 解析出错：${error}`)
-        loadingInstance.close()
+        parseNum.value -= 1
+        if(parseNum.value === 0) loadingInstance.close()
       }
     }
     reader.readAsText(file)
 }
 
-const cover = ref(false)
-
-
-function dragenterEvent(event) {
-  event.stopPropagation();
-  event.preventDefault();
-}
-function dragoverEvent(event) {
-  event.stopPropagation();
-  event.preventDefault();
-  cover.value = true
-}
-function dragleaveEvent(event) {
-  event.stopPropagation();
-  event.preventDefault();
-  cover.value = false
-}
 const dropEvent = event => {
   cover.value = false
   event.stopPropagation();
@@ -104,8 +108,10 @@ const dropEvent = event => {
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     const r = testFile(file.name)
-    if (r) handleFile(file, r)
-    if(i === files.length - 1) loadingInstance.close()
+    if (r) {
+      handleFile(file, r)
+      parseNum.value += 1
+    }
   }
 }
 
