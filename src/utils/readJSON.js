@@ -1,7 +1,7 @@
 import { dexieGet, dexieAdd } from '@/db/dexie'
 import md5 from 'md5'
 import init from '@/utils/init.js'
-
+import importData from '@/utils/importData.js'
 
 
 async function parseBook (bookData) {
@@ -47,6 +47,11 @@ async function parseBook (bookData) {
 
 export default async function readJSON(str) {
   const _str = JSON.parse(str)
+  if (_str.from && _str.from === 'send2Flomo') {
+    await importData(_str)
+    init()
+    return
+  }
   if (_str.documents && Array.isArray(_str.documents)) {
     for (let i = 0; i < _str.documents.length; i++) {
       await parseBook(_str.documents[i])
