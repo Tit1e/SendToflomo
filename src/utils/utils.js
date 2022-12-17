@@ -1,8 +1,8 @@
 import { toRaw } from 'vue'
 import { open } from '@tauri-apps/api/shell'
-
-export function openUrl(url){
-  if(!url) return false
+ import {isTauri} from './index.js'
+export function openUrl(url) {
+  if(!url || !isTauri()) return false
   open(url)
 }
 

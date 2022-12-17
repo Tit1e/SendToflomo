@@ -50,7 +50,7 @@ import { writeTextFile, BaseDirectory } from '@tauri-apps/api/fs';
 import { downloadDir } from '@tauri-apps/api/path';
 import { open } from '@tauri-apps/api/shell';
 import { ElMessageBox } from 'element-plus'
-import { copy } from '@/utils/index.js'
+import { copy, copyContent } from '@/utils/index.js'
 const { t } = useI18n()
 
 const store = useStore()
@@ -148,7 +148,7 @@ async function exportMD(isCopy = false){
     return pre + `- ${content.replace(val.note, '').replace(tag, '').replace(/\r/g, '').replace(/\n/g, '')}\n\n`
   }, `# ${title}\n\n`)
   if (isCopy) {
-    copy(content)
+    isTauri ? copy(content) : copyContent(content)
     return
   }
   if (isTauri) {

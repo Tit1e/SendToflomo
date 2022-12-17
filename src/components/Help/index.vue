@@ -15,10 +15,10 @@
       <li><span class="bold text-highlight">JSON:</span> {{t('json-file')}}</li>
       <li><span class="bold text-highlight">HTML:</span>  {{t('html-file')}}</li>
       <li><span class="bold text-highlight">TXT:</span> {{t('txt-file')}} </li>
-      <li class="pointer " @click="openUrl('https://mp.weixin.qq.com/s/CPIYoGItJVWJGk30MoVNXA')">
-        <span class="text-highlight underline bold">
+      <li class="pointer">
+        <a class="text-highlight underline" target="_blank" href="https://mp.weixin.qq.com/s/CPIYoGItJVWJGk30MoVNXA" @click="openUrl('https://mp.weixin.qq.com/s/CPIYoGItJVWJGk30MoVNXA')">
           {{ t('how-export') }}
-        </span>
+        </a>
       </li>
     </ol>
     <div class="mb-6 help-title">
