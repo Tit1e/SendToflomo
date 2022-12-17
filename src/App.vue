@@ -33,7 +33,7 @@ import {
   ref,
   computed
 } from 'vue'
-import { ElMessage, ElLoading } from 'element-plus'
+import { ElMessage, ElLoading} from 'element-plus'
 import addMemo from '@/utils/addMemo'
 import { useStore } from 'vuex'
 import { dexiePut } from '@/db/dexie'
@@ -44,14 +44,16 @@ import { Loading, testFile } from '@/utils/index.js'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const store = useStore()
+const isTauri = store.getters.isTauri
 
-
-if (isAutoUpdate()) {
-  // 触发自动更新
-  checkUpdate()
+if (isTauri) {
+  if (isAutoUpdate()) {
+    // 触发自动更新
+    checkUpdate()
+  }
+  // 自动读取 Apple Books 笔记
+  parseAppleBooks()
 }
-// 自动读取 Apple Books 笔记
-parseAppleBooks()
 
 let loadingInstance = null
 const parseNum = ref(0)
@@ -121,7 +123,6 @@ const dropEvent = event => {
 const bookSort = JSON.parse(localStorage.getItem('bookSort') || '[]').reverse()
 init(bookSort)
 
-const isTauri = store.getters.isTauri
 const importCount = computed(() => store.getters.importCount)
 const selectedList = computed(() => store.getters.selectedList)
 const tag = ref('')
@@ -130,7 +131,7 @@ const total = ref(0)
 
 
 const loadingText = computed(() => {
-  return `为减轻服务器压力，导入间隔为 1s。导入进度： ${index.value + 1}/${total.value}`
+  return `${t('progress')}： ${index.value + 1}/${total.value}`
 })
 
 
@@ -164,13 +165,15 @@ async function sendMemo (url, list, _index) {
         }, 1000)
       } else {
         loading.value.close()
-        ElMessage.success(message)
+        ElMessage.success(t('import-success'))
       }
-    }else{
-      ElMessage.error(message)
+    } else {
+      console.error(message)
+      ElMessage.error(t('import-failure'))
     }
   } catch (error) {
-    ElMessage.error('导入失败')
+    console.error(error)
+    ElMessage.error(t('import-failure'))
     loading.value.close()
   }
 }
