@@ -26,7 +26,6 @@ export default async function handleCheckUpdate(loading) {
             confirmButtonText: t('restart-now'),
             cancelButtonText: t('talk-about-later'),
             dangerouslyUseHTMLString: true,
-            customClass: 'custom-msg-title',
           }
         )
         if (action === 'confirm') {
@@ -59,7 +58,6 @@ export default async function handleCheckUpdate(loading) {
           confirmButtonText: t('download-now'),
           cancelButtonText: t('talk-about-later'),
           dangerouslyUseHTMLString: true,
-          customClass: 'custom-msg-title',
         }
       )
       if (action === 'confirm') {

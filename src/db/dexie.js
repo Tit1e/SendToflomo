@@ -34,3 +34,7 @@ export async function dexieAdd(Obj, table = 'notes') {
 export async function dexiePut(Obj, table = 'notes') {
   return await _nodeDB[table].put(Obj)
 }
+
+export async function dexieClear(table = 'notes') {
+  return await _nodeDB[table].clear()
+}

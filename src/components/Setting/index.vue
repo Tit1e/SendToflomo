@@ -20,6 +20,10 @@
           </div>
         </div>
     </div>
+    <div class="setting-title">{{t('data')}}</div>
+    <div>
+      <el-button type="danger" size="default" @click="handleClear">{{t('clear-all-data')}}</el-button>
+    </div>
     <div class="setting-title">{{t('about')}}</div>
     <ul class="links">
       <li v-for="(value, key) in links" :key="key">
@@ -32,8 +36,8 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import { ElMessageBox } from 'element-plus'
-import { openUrl } from '@/utils/utils.js'
+import { ElMessageBox, ElNotification } from 'element-plus'
+import { openUrl, clearAllData } from '@/utils/utils.js'
 import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex'
 import { copy, isAutoUpdate } from '@/utils/index.js'
@@ -68,9 +72,10 @@ const handleCommand = async (url, key) => {
   if(isTauri){
     if (key === 'netdisc') {
       copy('g1ce', '')
-      ElMessageBox.alert('密码 g1ce 已复制到粘贴板', '密码已复制', {
+      ElMessageBox.alert(t('copied-content'), t('copied-tip'), {
+        type: 'success',
         autofocus: false,
-        confirmButtonText: '打开网盘地址',
+        confirmButtonText: t('open-address'),
         callback: action => {
           if (action === 'confirm') {
             openUrl(url)
@@ -87,6 +92,33 @@ const handleCommand = async (url, key) => {
 const loading = ref(false)
 const handleCheckUpdate = async () => {
   checkUpdate(loading)
+}
+const handleClear = async () => {
+  ElMessageBox.alert(t('confirm-clear'), t('confirm'), {
+        type: 'warning',
+        autofocus: false,
+        showClose: false,
+        showCancelButton: true,
+        cancelButtonText: t('cancel'),
+        confirmButtonText: t('clear-all-data'),
+        callback: async action => {
+          if (action === 'confirm') {
+            try {
+              await clearAllData()
+              ElNotification({
+                message: t('data-cleared'),
+                type: 'success',
+                duration: 1500,
+                onClose: () => {
+                  window.location.reload()
+                }
+              })
+            } catch (error) {
+              ElNotification.success(t('data-clear-failure'))
+            }
+          }
+        }
+      })
 }
 </script>
 

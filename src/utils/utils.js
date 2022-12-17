@@ -1,6 +1,8 @@
 import { toRaw } from 'vue'
 import { open } from '@tauri-apps/api/shell'
- import {isTauri} from './index.js'
+import { isTauri } from './index.js'
+import { dexieClear } from '@/db/dexie.js'
+
 export function openUrl(url) {
   if(!url || !isTauri()) return false
   open(url)
@@ -24,4 +26,14 @@ export function delField(proxy) {
   delete row.content
   delete row.content_temp
   return row
+}
+
+export const clearAllData = async () => {
+  try {
+    await  Promise.all([await dexieClear('notes'), await dexieClear('books')])
+    return Promise.resolve()
+  } catch (error) {
+    console.error(error)
+    return Promise.reject()
+  }
 }
