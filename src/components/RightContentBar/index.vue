@@ -14,6 +14,7 @@
       <div class="flex-1 transparent" data-tauri-drag-region>drag</div>
     </div>
     <div class="bar-right">
+      <a v-if="!isTauri" class="mr-16" href="https://tit1e.github.io/kindle2Flomo/old/">{{t('back-to-old-version')}}</a>
       <template v-if="isTauri">
         <el-tooltip
           effect="dark"
@@ -22,6 +23,17 @@
         >
           <div class="fixed k-icon" :class="{'active': winTop}" @click="toggleWinTop"></div>
         </el-tooltip>
+      </template>
+      <template v-if="isTauri">
+        <el-dropdown @command="handleOpen" size="large">
+          <div class="website k-icon"></div>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="old">{{t('old-web')}}</el-dropdown-item>
+              <el-dropdown-item command="new">{{t('new-web')}}</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </template>
       <el-dropdown @command="handleExport" size="large">
         <div class="export k-icon"></div>
@@ -45,6 +57,7 @@
 <script setup>
 import Help from '@/components/Help/index.vue'
 import Setting from '@/components/Setting/index.vue'
+import {openUrl} from '@/utils/utils.js'
 import { ref, computed, shallowRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex'
@@ -73,6 +86,14 @@ const selectAll = ref(false)
 function toggleSelectedAll(){
   selectAll.value = !selectAll.value
   store.commit('SELECT_ALL', selectAll.value)
+}
+
+function handleOpen(command) {
+  const urlMap = {
+    'old': 'https://tit1e.github.io/kindle2Flomo/old/',
+    'new': 'https://tit1e.github.io/kindle2Flomo/'
+  }
+  openUrl(urlMap[command])
 }
 
 function handleExport(command){
@@ -147,6 +168,10 @@ const urlMap = {
     &.help {
       margin-right: 16px;
       background-image: url(../../assets/icons/help.png);
+    }
+    &.website {
+      margin-right: 16px;
+      background-image: url(../../assets/icons/website.png);
     }
     &.export {
       margin-right: 16px;
