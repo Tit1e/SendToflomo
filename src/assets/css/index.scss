@@ -89,6 +89,14 @@ body {
     display: none;
   }
 
+  .text-indent {
+    text-indent: 2em;
+  }
+
+  .text-danger{
+    color: rgb(216, 116, 116);
+  }
+
   .text-highlight{
     color: #55bb8e;
   }
@@ -151,6 +159,7 @@ body {
   .flex-center{
     align-items: center;
   }
+
   .transparent{
     opacity: 0;
   }
@@ -206,6 +215,9 @@ body {
   }
   .mr-10{
     margin-right: 10px;
+  }
+  .mr-16{
+    margin-right: 16px;
   }
   .mb-6{
     margin-bottom: 6px;
