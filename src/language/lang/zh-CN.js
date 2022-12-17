@@ -3,6 +3,11 @@ const ByMeACoffee = {
   'wechat-pay': '微信支付',
 }
 const Help = {
+  'data-migration': '数据迁移',
+  'data-migration-tip': '如果是 Send2Flomo 老用户，可以参照教程将数据迁移至新版本。注：迁移过来的数据将覆盖现有的数据（如果数据重叠），为确保数据完整，请迁移完数据后再使用此软件。',
+  'data-migration-1': '下载并安装最新版',
+  'data-migration-2': '右上角【导出】-【导出所有数据】，将导出文件保存至本地',
+  'data-migration-3': '将导出的 JSON 文件拖入本窗口',
   'help': '常见问题解答',
   'warning': '使用说明',
   'warning-1': '将 txt、html、json 文件拖入应用，软件自动解析',
@@ -52,13 +57,20 @@ const LeftBar = {
   'notes-options': '笔记设置',
 }
 const MemoCard = {
-  'view-in-apple-books': '在 Apple Books 中查看'
+  'view-in-apple-books': '在 Apple Books 中查看',
+  'reset-tip': '该 memo 的内容与状态都将被还原，是否继续？',
+  'revert': '还 原'
 }
 const RightContent = {
   'save': '保 存',
   'cancel': '取 消',
+  'csv-export-tip': '新版客户端暂不支持 CSV 格式导出，如有需求，请使用网页端。',
+  'ok': '我知道啦',
+  'open-web-page': '打开网页端',
+  'prompt': '提示'
 }
 const RightContentBar = {
+  'back-to-old-version': '返回旧版',
   'import-tip': '未经审视的生活不值得过，未经审视的思想也不应该汇入你的大脑。建议在导入前审视一遍内容。',
   'all': '全选',
   'not-all': '全不选',
@@ -69,6 +81,8 @@ const RightContentBar = {
   'export-md': '导出 Markdown',
   'export-csv': '导出 CSV',
   'setting': '设置',
+  'old-web': '访问旧版',
+  'new-web': '访问新版',
 }
 const Setting = {
   'update-by-yourself': '手动更新',
@@ -85,6 +99,15 @@ const Setting = {
   'update': '更新',
   'check-update': '检查更新',
   'auto-check': '自动检查更新',
+  'data': '数据',
+  'clear-all-data': '清除所有数据',
+  'confirm': '确认',
+  'confirm-clear': '确认清除 SendToflomo 中的所有数据？',
+  'data-clear-failure': '数据清除失败',
+  'data-cleared': '数据已清除',
+  'copied-tip': '复制成功',
+  'copied-content': '密码 g1ce 已复制到粘贴板。',
+  'open-address': '打开网盘地址'
 }
 const System = {
   'reading-notes': '正在读取',
@@ -100,7 +123,7 @@ const System = {
   'loading': '正在加载',
   'progress': '导入进度',
   'import-failure': '导入失败',
-  'import-success': '已记录'
+  'import-success': '已记录',
 }
 export default {
   ...ByMeACoffee,

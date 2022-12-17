@@ -104,10 +104,11 @@ const parseOptions = computed(() => store.getters.parseOptions)
 
 async function exportCSV() {
   if (isTauri) {
-    ElMessageBox.alert('新版客户端暂不支持 CSV 格式导出，如有需求，请使用网页端。', '提示', {
-      confirmButtonText: '我知道啦',
-      cancelButtonText: '打开网页端',
+    ElMessageBox.alert(t('csv-export-tip'), t('prompt'), {
+      confirmButtonText: t('ok'),
+      cancelButtonText: t('open-web-page'),
       showCancelButton: true,
+      autofocus: false,
       showClose: false,
       callback: action => {
         if (action === 'cancel') {

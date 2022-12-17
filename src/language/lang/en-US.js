@@ -3,6 +3,11 @@ const ByMeACoffee = {
   'wechat-pay': 'WeChat pay',
 }
 const Help = {
+  'data-migration': 'Data Migration',
+  'data-migration-tip': 'If you are an old Send2Flomo user, you can refer to the tutorial to migrate data to the new version. Note: The migrated data will overwrite the existing data (if the data overlaps), in order to ensure the integrity of the data, please use this software after migrating the data.',
+  'data-migration-1': 'Download and install the latest version of',
+  'data-migration-2': 'The upper right corner [Export] - [Export all data], save the exported file to the local',
+  'data-migration-3': 'Drag the exported JSON file into this window',
   'help': 'Help',
   'warning': 'Warning',
   'warning-1': 'Drag txt, html, json files into the application, and the software will automatically parse them',
@@ -52,13 +57,20 @@ const LeftBar = {
   'notes-options': 'Notes Options',
 }
 const MemoCard = {
-  'view-in-apple-books': 'View in Apple Books'
+  'view-in-apple-books': 'View in Apple Books',
+  'reset-tip': 'The content and state of the memo will be restored, continue?',
+  'revert': 'Revert'
 }
 const RightContent = {
   'save': 'Save',
   'cancel': 'Cancel',
+  'csv-export-tip': 'The new version of the client does not support exporting in CSV format. If necessary, please use the web page.',
+  'ok': 'OK',
+  'open-web-page': 'Open the web page',
+  'prompt': 'Prompt'
 }
 const RightContentBar = {
+  'back-to-old-version': 'Back to the old version',
   'import-tip': 'Unchanging life is not worth living, and unruly thoughts should not be remitted into your brain. It is recommended to review the content before importing.',
   'all': 'All',
   'not-all': 'DESELECT ALL',
@@ -69,6 +81,8 @@ const RightContentBar = {
   'export-md': 'Export Markdown',
   'export-csv': 'Export CSV',
   'setting': 'Setting',
+  'old-web': 'Visit old version',
+  'new-web': 'Visit new version',
 }
 const Setting = {
   'update-by-yourself': 'Update By Yourself',
@@ -85,6 +99,15 @@ const Setting = {
   'buy-me-a-coffee': 'Buy Me A Coffee',
   'check-update': 'Check Update',
   'auto-check': 'Automatic Check Update',
+  'data': 'Data',
+  'clear-all-data': 'Clear All Data',
+  'confirm': 'Confirm',
+  'confirm-clear': 'Are you sure you want to clear all data from SendToflomo?',
+  'data-clear-failure': 'Data clear failure',
+  'data-cleared': 'Data has been cleared',
+  'copied-tip': 'copied succes',
+  'copied-content': 'The password g1ce has been copied.',
+  'open-address': 'Open Address'
 }
 const System = {
   'reading-notes': 'reading',
@@ -100,7 +123,7 @@ const System = {
   'loading': 'Loading',
   'progress': 'Progress',
   'import-failure': 'Import failure',
-  'import-success': 'Success'
+  'import-success': 'Success',
 }
 export default {
   ...ByMeACoffee,

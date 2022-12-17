@@ -36,12 +36,12 @@ function resetMemo(e, item) {
   e.stopPropagation()
   if(!item.content_update && !item.uploaded) return
   ElMessageBox.confirm(
-    '该 memo 的内容与状态都将被还原，是否继续？',
-    '还 原',
+    t('reset-tip'),
+    t('revert'),
     {
       closeOnClickModal: false,
-      confirmButtonText: '还 原',
-      cancelButtonText: '取 消',
+      confirmButtonText: t('revert'),
+      cancelButtonText: t('cancel'),
       type: 'warning',
     }
   )
