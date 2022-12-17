@@ -126,7 +126,7 @@
                     <el-input v-model="options.book" @blur="updateBook"></el-input>
                   </el-form-item>
                   <el-form-item :label="t('book-list')" label-width="0">
-                    <div class="list-wrap">
+                    <div class="list-wrap" :class="isTauri ? 'tuari-height' : 'web-height'">
                       <el-radio-group
                         class="book-list"
                         v-model="options.title"
@@ -184,6 +184,8 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 
+
+
 const $emit = defineEmits([
   'update-tag',
   'parse',
@@ -191,6 +193,7 @@ const $emit = defineEmits([
   'list-update'
 ])
 const store = useStore()
+const isTauri = computed(() => store.getters.isTauri)
 const selectedList = computed(() => store.getters.selectedList)
 const importDisabled = computed(() => store.getters.importCount >= 100)
 const bookList = computed(() => store.getters.bookList.filter(i => i.texts.length))
@@ -214,7 +217,6 @@ function updateBook(e){
   dexiePut(bookData, 'books')
 }
 
-const isTauri = store.getters.isTauri
 let options = reactive({
   book: '',
   title: '',
@@ -396,10 +398,15 @@ function computedTag () {
       }
     }
     .list-wrap {
-      max-height: calc(100vh - 306px);
       overflow: scroll;
       margin-bottom: -16px;
       width: 100%;
+      &.tuari-height{
+        max-height: calc(100vh - 306px);
+      }
+      &.web-height{
+        max-height: calc(100vh - 364px);
+      }
       .book-list {
         width: 100%;
         :deep(.el-radio) {
