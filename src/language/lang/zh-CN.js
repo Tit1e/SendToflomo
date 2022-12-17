@@ -86,8 +86,23 @@ const Setting = {
   'check-update': '检查更新',
   'auto-check': '自动检查更新',
 }
-export default {
+const System = {
   'reading-notes': '正在读取',
+  'update-failed': '更新失败，请稍后重试',
+  'restart-now-tip': '下载完成，是否立即重启？',
+  'install': '安装更新',
+  'restart-now': '立即重启',
+  'talk-about-later': '以后再说',
+  'download-now': '立即下载',
+  'find-new-version': '发现新版本！',
+  'new-version': '新版本 {version} 可供使用，是否现在更新？',
+  'copied': '已复制',
+  'loading': '正在加载',
+  'progress': '导入进度',
+  'import-failure': '导入失败',
+  'import-success': '已记录'
+}
+export default {
   ...ByMeACoffee,
   ...Help,
   ...LeftBar,
@@ -95,4 +110,5 @@ export default {
   ...RightContent,
   ...RightContentBar,
   ...Setting,
+  ...System
 }

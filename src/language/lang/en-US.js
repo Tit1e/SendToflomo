@@ -86,8 +86,23 @@ const Setting = {
   'check-update': 'Check Update',
   'auto-check': 'Automatic Check Update',
 }
-export default {
+const System = {
   'reading-notes': 'reading',
+  'update-failed': 'Update failed, please try again later',
+  'restart-now-tip': 'The download has been completed, do you restart immediately?',
+  'install': 'Install',
+  'restart-now': 'Restart Now',
+  'talk-about-later': 'Not Now',
+  'download-now': 'Download Now',
+  'find-new-version': 'New Version!',
+  'new-version': 'The new version {version} is ready, is it updated now?',
+  'copied': 'Copied',
+  'loading': 'Loading',
+  'progress': 'Progress',
+  'import-failure': 'Import failure',
+  'import-success': 'Success'
+}
+export default {
   ...ByMeACoffee,
   ...Help,
   ...LeftBar,
@@ -95,4 +110,5 @@ export default {
   ...RightContent,
   ...RightContentBar,
   ...Setting,
+  ...System
 }

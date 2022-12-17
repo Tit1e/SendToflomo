@@ -1,9 +1,23 @@
 import { ElLoading } from 'element-plus'
 import { writeText } from '@tauri-apps/api/clipboard';
 import { ElMessage } from 'element-plus'
-export const copy = async (text, msg = '已复制') => {
+import i18n from '@/language/index'
+const t = i18n.global.t
+
+export const copy = async (text, msg = t('copied')) => {
   try {
     await writeText(text)
+    if(msg) ElMessage.success(msg)
+    return true
+  } catch (error) {
+    console.error(error)
+    return Promise.reject()
+  }
+}
+
+export const copyContent = async (text, msg = t('copied')) => {
+  try {
+    await navigator.clipboard.writeText(text);
     if(msg) ElMessage.success(msg)
     return true
   } catch (error) {
@@ -24,7 +38,7 @@ export const  Loading =  (options = {}) => {
   return ElLoading.service({
     body: true,
     lock: true,
-    text: '正在加载',
+    text: t('loading'),
     ...options
   })
 }

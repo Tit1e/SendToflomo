@@ -1,6 +1,8 @@
 import { dexieList, dexieGetListByTitle } from '@/db/dexie'
 import { addField } from '@/utils/utils'
 import store from '@/store/index.js'
+
+
 async function init(sortList = []) {
   const books = await dexieList('books')
   const result = []
