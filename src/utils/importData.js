@@ -2,6 +2,7 @@ import { dexieGet, dexieAdd, dexiePut } from '@/db/dexie'
 export default async function importData({ books, notes }) {
   try {
     if (books.length) {
+      books.reverse()
       for (let i = 0; i < books.length; i++) {
         let book = books[i];
         const newInfo = await dexieGet(book.uuid, 'books')
@@ -19,6 +20,7 @@ export default async function importData({ books, notes }) {
       }
     }
     if (notes.length) {
+      notes.reverse()
       for (let i = 0; i < notes.length; i++) {
         let note = notes[i];
         const newInfo = await dexieGet(note.uuid)
