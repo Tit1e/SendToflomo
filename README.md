@@ -1,11 +1,17 @@
 # Send2flomo
 > 将 Kindle、Apple Books、KOReader笔记一键导入至 flomo
 
-![SendToflomo downloads](https://img.shields.io/github/downloads/Tit1e/SendToflomo/total)
-![](https://img.shields.io/badge/license-GPL-green.svg)
-[![](https://img.shields.io/badge/即刻-@直走的螃蟹-FFE440.svg)](https://web.okjike.com/u/FFDB1E46-63DC-43BE-AA1A-36F3D9CD0017)
 [![简体中文 badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-Simplified%20Chinese-blue)](./README.md)
+&nbsp;&nbsp;
 [![English badge](https://img.shields.io/badge/%E8%8B%B1%E6%96%87-English-blue)](./README_en_US.md)
+
+![SendToflomo downloads](https://img.shields.io/github/downloads/Tit1e/SendToflomo/total)
+&nbsp;&nbsp;
+![](https://img.shields.io/badge/license-GPL-green.svg)
+&nbsp;&nbsp;
+[![](https://img.shields.io/badge/即刻-@直走的螃蟹-FFE440.svg)](https://web.okjike.com/u/FFDB1E46-63DC-43BE-AA1A-36F3D9CD0017)
+&nbsp;&nbsp;
+[![evollyone](https://img.shields.io/twitter/follow/evollyone.svg?style=social)](https://twitter.com/evollyone)
 
 ## 📦 Downloads
 [📝 Update Log](./UPDATE_LOG.md)
