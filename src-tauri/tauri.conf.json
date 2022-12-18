@@ -51,7 +51,7 @@
     },
     "updater": {
       "active": true,
-      "dialog": true,
+      "dialog": false,
       "endpoints": [
         "https://tit1e.github.io/SendToflomo/install.json"
       ],
