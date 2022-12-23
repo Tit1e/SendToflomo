@@ -29,9 +29,11 @@ import readFile from '@/utils/readFile.js'
 import readJSON from '@/utils/readJSON.js'
 import paresClip from '@/utils/paresClip.js'
 import parseAppleBooks from '@/utils/parseAppleBooks.js'
+import parseWeread from '@/utils/parseWeread.js'
 import {
   ref,
-  computed
+  computed,
+  onMounted
 } from 'vue'
 import { ElMessage, ElLoading} from 'element-plus'
 import addMemo from '@/utils/addMemo'
@@ -42,6 +44,7 @@ import { isAutoUpdate } from '@/utils/index.js'
 import checkUpdate from '@/utils/checkUpdate.js'
 import { Loading, testFile } from '@/utils/index.js'
 import { useI18n } from 'vue-i18n'
+import { indexOf } from 'lodash'
 const { t } = useI18n()
 const store = useStore()
 const isTauri = store.getters.isTauri
@@ -74,6 +77,26 @@ const dragleaveEvent = (event) => {
   event.preventDefault();
   cover.value = false
 }
+
+const isWeread = text =>{
+  const a = text[0] === '《'
+  const b = text.indexOf('◆') >= 0
+  const c = text.indexOf('>>') >= 0
+  return a && b && c
+}
+
+onMounted(() => {
+  document.body.addEventListener('paste', async (event) => {
+    if (!event.target.type || event.target.type === undefined) {
+      const text = event.clipboardData.getData('text')
+      if (text && isWeread(text)) {
+        loadingInstance = Loading({text: t('reading-notes')})
+        await parseWeread(text)
+        loadingInstance.close()
+      }
+    }
+  })
+})
 
 const handleFile = (file, ext = '') => {
     if(!ext) return

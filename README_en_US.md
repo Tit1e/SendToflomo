@@ -25,6 +25,7 @@
 
 ## 📋 Remind
 * The import method is to drag files into the application
+* The method of importing Weread notes is [Login to the web page] - [Copy all notes] - [Use the paste shortcut Ctrl Or Cmd + v]. Don't position the cursor in the input box when paste
 * Old data migration will cover the existing data (if there is the same record), so try to move as much as possible before importing
 * Apple Books data will be read automatically when the software starts, so after [Clear All Data], there will still be Apple Books data, but the data has been reset
 

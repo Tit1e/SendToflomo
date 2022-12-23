@@ -7,9 +7,13 @@
       <li>{{t('data-migration-2')}}</li>
       <li>{{t('data-migration-3')}}</li>
     </ol>
+    <div class="help-title">{{t('import-weread')}}</div>
+    <ol>
+      <li v-for="i in 4">{{t(`import-weread-${i}`)}}</li>
+    </ol>
     <div class="help-title">{{t('warning')}}</div>
     <ol>
-      <li v-for="i in 6">{{t(`warning-${i + 1}`)}}</li>
+      <li v-for="i in 7">{{t(`warning-${i}`)}}</li>
     </ol>
     <div class="help-title">{{t('file')}}</div>
     <ol>

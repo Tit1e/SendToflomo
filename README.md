@@ -1,5 +1,5 @@
 # Send2flomo
-> 将 Kindle、Apple Books、KOReader笔记一键导入至 flomo
+> 将 Kindle、Apple Books、KOReader、微信读书笔记一键导入至 flomo
 
 [![简体中文 badge](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-Simplified%20Chinese-blue)](./README.md)
 &nbsp;&nbsp;
@@ -25,6 +25,7 @@
 
 ## 📋 注意事项
 * 将文件拖入应用界面即可导入
+* 微信读书笔记导入方式为【登录网页端】-【复制全部笔记】-【使用粘贴快捷键 CtrlOrCmd + v】，注意，粘贴时光标不要定位在输入框内
 * 旧数据迁移会覆盖现有数据（如果存在相同记录），因此尽量迁移完成后再进行导入
 * Apple Books 数据在软件启动时会自动读取，因此【清除所有数据】后，依旧会有 Apple Books 的数据，不过此时的数据已被重置。
 
